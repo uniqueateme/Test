@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
 import requests
 from bs4 import BeautifulSoup
-import re
-app = Flask(_name_)
+app = Flask('_name_')
 BASE_URL = "https://hashkeys.space/71/"
+
+
 def scrape_addresses():
     response = requests.get(BASE_URL)
     soup = BeautifulSoup(response.content, 'html.parser')
@@ -16,6 +17,8 @@ def scrape_addresses():
             address = columns[1].text.strip()
             addresses.append((key_hex, address))
     return addresses
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     found_address = None
@@ -27,5 +30,6 @@ def home():
                 found_address = (key_hex, address)
                 break
     return render_template('index.html', found_address=found_address)
-if _name_ == '_main_':
-    app.run(host='0.0.0.0', port=5001)
+
+    if '_name_' == '_main_':
+        app.run(host='0.0.0.0', port=8000)  # Change port to 8080
