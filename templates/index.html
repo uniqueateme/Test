@@ -9,8 +9,7 @@
         form { margin-bottom: 20px; }
         input[type="text"] { padding: 10px; width: 300px; }
         button { padding: 10px; }
-        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
-        th, td { padding: 10px; text-align: left; border: 1px solid #ccc; }
+        .result { margin-top: 20px; padding: 10px; background-color: #f0f0f0; border-left: 4px solid #3366cc; }
     </style>
 </head>
 <body>
@@ -20,29 +19,15 @@
         <button type="submit">Search</button>
     </form>
     {% if found_address %}
-        <h2>Result:</h2>
-        <p>Key Hex: <strong>{{ found_address[0] }}</strong></p>
-        <p>Found Address: <strong>{{ found_address[1] }}</strong></p>
-        <p>Balance: <strong>{{ found_address[2] }}</strong></p>
+        <div class="result">
+            <h2>Result:</h2>
+            <p>Key Hex: <strong>{{ found_address[0] }}</strong></p>
+            <p>Address: <strong>{{ found_address[1] }}</strong></p>
+        </div>
     {% elif found_address is none %}
-        <h2>No Address Found!</h2>
+        <div class="result">
+            <h2>No Address Found!</h2>
+        </div>
     {% endif %}
-    <h2>Filtered Addresses with Balance > 0:</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Key Hex</th>
-                <th>Balance</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for addr in filtered_addresses %}
-            <tr>
-                <td>{{ addr[0] }}</td>
-                <td>{{ addr[1] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 </body>
 </html>
